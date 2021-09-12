@@ -4,23 +4,23 @@ import { fileURLToPath } from 'node:url';
 import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 
-// Create "memes" folder if it doesn't exist.
+// Create "memes" folder if it doesn't exist yet.
 const currentDir = dirname(fileURLToPath(import.meta.url));
 fs.mkdir(path.join(currentDir, 'memes'), (err) => {
   if (err) {
-    return console.error(err);
+    return console.error('File already exists!');
   }
   console.log('Directory created successfully!');
 });
 
-// Fetch data with Node-fetch and scrape using Cheerio.
+// Fetch data with Node-fetch.
 const response = await fetch(
   'https://memegen-link-examples-upleveled.netlify.app/',
 );
 const body = await response.text();
 const imageUrls = [];
 
-// Loop through Array.
+// Scrape using Cheerio and loop through Array --> 'memes'.
 const $ = cheerio.load(body);
 const myFolder = './memes';
 for (let i = 0; i < 10; i++) {
@@ -31,3 +31,5 @@ for (let i = 0; i < 10; i++) {
     res.body.pipe(dest);
   });
 }
+
+console.log('10 images succesfully saved in /memes folder!');
