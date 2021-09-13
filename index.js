@@ -25,7 +25,6 @@ const $ = cheerio.load(body);
 const myFolder = './memes';
 for (let i = 0; i < 10; i++) {
   const image = $('img', body)[i].attribs.src;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const myUrls = imageUrls.push(image);
   fetch(image).then((res) => {
     const dest = fs.createWriteStream(`${myFolder}/memes${i + 1}.jpg`);
