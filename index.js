@@ -32,7 +32,7 @@ const response = await fetch(
   'https://memegen-link-examples-upleveled.netlify.app/',
 );
 const body = await response.text();
-const imageUrls = [];
+// const imageUrls = [];
 
 // Scrape using Cheerio and loop through Array --> 'memes'.
 const $ = cheerio.load(body);
@@ -40,7 +40,7 @@ const myFolder = './memes';
 for (let i = 0; i < 10; i++) {
   const image = $('img', body)[i].attribs.src;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const myUrls = imageUrls.push(image);
+  // const myUrls = imageUrls.push(image);
   fetch(image).then((res) => {
     const dest = fs.createWriteStream(`${myFolder}/memes${i + 1}.jpg`);
     res.body.pipe(dest);
